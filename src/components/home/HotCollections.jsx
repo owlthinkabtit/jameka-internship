@@ -9,18 +9,6 @@ import axios from "axios";
 import AuthorItems from "../author/AuthorItems";
 
 
-
-axios
-  .get(
-    "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
-  )
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
 
