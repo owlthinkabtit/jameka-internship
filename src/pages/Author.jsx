@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
+import axios from "axios";
 
 const Author = () => {
+  const [topSellers, setTopSellers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers"
+      )
+      .then((response) => {
+        setTopSellers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching top sellers:", error);
+      });
+  }, []);
+
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -55,7 +71,7 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems />
+                  <AuthorItems topSellers={topSellers} />
                 </div>
               </div>
             </div>
