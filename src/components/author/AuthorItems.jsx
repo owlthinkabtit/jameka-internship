@@ -1,25 +1,62 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
+import Skeleton from "../UI/Skeleton";
 
 const AuthorItems = () => {
   const { id } = useParams();
-  const [author, setAuthor] = useState ([null]);
+  const [author, setAuthor] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios 
-      .get( `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`)
+    setLoading(true);
+    axios
+      .get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
+      )
       .then((response) => {
         setAuthor(response.data);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching Author Items")
+        console.error("Error fetching Author Items", error);
+        setLoading(false);
       });
   }, [id]);
 
-  const { nftCollection = [] } = author;
+  const renderSkeletons = () => {
+    return Array(8)
+      .fill(0)
+      .map((_, index) => (
+        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+          <div className="nft__item">
+            <div className="author_list_pp">
+              <Skeleton width="50px" height="50px" borderRadius="50%" />
+            </div>
+            <div className="nft__item_wrap">
+              <Skeleton width="100%" height="200px" borderRadius="10px" />
+            </div>
+            <div className="nft__item_info">
+              <Skeleton width="70%" height="20px" borderRadius="5px" />
+              <Skeleton width="50%" height="20px" borderRadius="5px" />
+            </div>
+          </div>
+        </div>
+      ));
+  };
+
+  if (loading) {
+    return (
+      <div className="de_tab_content">
+        <div className="tab-1">
+          <div className="row">{renderSkeletons()}</div>
+        </div>
+      </div>
+    );
+  }
+
+  const { nftCollection = [] } = author || {};
+
   return (
     <div className="de_tab_content">
       <div className="tab-1">
@@ -28,8 +65,12 @@ const AuthorItems = () => {
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">
-                  <Link to={`/author/${item.authorId}`}>
-                    <img className="lazy" src={item.authorImage} alt="" />
+                  <Link to={`/author/${item.author}`}>
+                    <img
+                      className="lazy"
+                      src={item.authorImage}
+                      alt=""
+                    />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
