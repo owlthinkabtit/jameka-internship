@@ -15,6 +15,7 @@ const AuthorItems = () => {
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
       )
       .then((response) => {
+        console.log("API Response:", response.data);
         setAuthor(response.data);
         setLoading(false);
       })
@@ -65,7 +66,7 @@ const AuthorItems = () => {
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">
-                  <Link to={`/author/${item.author}`}>
+                  <Link to={`/author/${item.authorId}`}>
                     <img
                       className="lazy"
                       src={item.authorImage}
