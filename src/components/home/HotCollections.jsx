@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
+import CustomNextArrow from "../UI/CustomNextArrow";
+import CustomPrevArrow from "../UI/CustomPrevArrow";
 import AuthorItems from "../author/AuthorItems";
 
 
@@ -32,6 +34,8 @@ const HotCollections = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
     responsive: [
       {
         breakpoint: 1024,

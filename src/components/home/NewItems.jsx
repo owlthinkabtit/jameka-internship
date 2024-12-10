@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
+import CustomNextArrow from "../UI/CustomNextArrow";
+import CustomPrevArrow from "../UI/CustomPrevArrow";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
@@ -56,6 +58,8 @@ const NewItems = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: true,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
