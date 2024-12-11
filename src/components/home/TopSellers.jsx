@@ -28,7 +28,10 @@ const TopSellers = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="col-md-12">
+          <div 
+            className="col-md-12"
+            data-aos="fade-up"
+            data-aos-duration="1000">
             <ol className="author_list">
               {topSellers.map((item,index) => (
                 <li key={index}>
