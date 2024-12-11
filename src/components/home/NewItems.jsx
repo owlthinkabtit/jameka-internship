@@ -94,7 +94,11 @@ const NewItems = () => {
           </div>
           <Slider {...settings}>
             {newItems.map((item, index) => (
-              <div className="col-md-12" key={index}>
+              <div 
+                className="col-md-12" 
+                key={index}
+                data-aos="fade-up"
+                data-aos-duration="1000">
                 <div className="nft__item">
                   <div className="author_list_pp">
                     <Link
